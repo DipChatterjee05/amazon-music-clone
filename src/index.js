@@ -1,9 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home";
+import Social from "./pages/Social";
+import Library from "./pages/Library";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <App />
-);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <h1>This Is Home</h1>,
+      },
+      {
+        path: "home",
+        element: <Home />,
+      },
+      {
+        path: "social",
+        element: <Social />,
+      },
+      {
+        path: "library",
+        element: <Library />,
+      },
+      {
+        path: "signin",
+        element: <h1>Sign In</h1>,
+      },
+      {
+        path: "signup",
+        element: <h1>Sign Up</h1>,
+      },
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={router} />);
