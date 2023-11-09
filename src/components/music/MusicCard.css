@@ -1,0 +1,14 @@
+.music-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    
+}
+
+.music-card-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 0.5rem;
+}
