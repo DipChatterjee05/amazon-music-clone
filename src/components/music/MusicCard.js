@@ -7,8 +7,8 @@ const MusicCard = ({ details }) => {
   return (
     <section className="music-card-container">
       <img src={thumbnail} alt={title} className="music-card-image" />
-      <p className="music-card-title">{title}</p>
-      <p className="music-card-artist">{artistNames.join(" & ")}</p>
+      <p className="music-card-title one-line" title={title}>{title}</p>
+      <p className="music-card-artist one-line" title={artistNames}>{artistNames.join(" & ")}</p>
     </section>
   );
 };

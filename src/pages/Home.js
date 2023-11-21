@@ -18,7 +18,6 @@ function Home() {
         "https://academics.newtonschool.co/api/v1/music/song",
         config
       );
-      console.log("response", response.data.data);
       setMusicList(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -39,7 +38,7 @@ function Home() {
         <section  className="music-list-container">
           {musicList.length > 0 &&
             musicList.map((music) => {
-              return <MusicCard details={music}/>;
+              return <MusicCard details={music} />;
             })}
         </section>
       )}
