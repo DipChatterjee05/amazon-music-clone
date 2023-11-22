@@ -1,14 +1,15 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from "react";
 import "./SignUp.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../App";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../provider/AuthProvider";
 
 function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const {setIsLoggedIn} = useContext(AuthContext);
+  const { setIsLoggedIn } = useAuth();
+  const { state } = useLocation();
 
   const signInUser = async (user) => {
     const config = {
@@ -20,16 +21,23 @@ function SignIn() {
     try {
       const response = await axios.post(
         "https://academics.newtonschool.co/api/v1/user/login",
-        {...user, appType: "music"},
+        { ...user, appType: "music" },
         config
       );
       console.log("response", response);
       const token = response.data.token;
-      if(token) {
+      if (token) {
         sessionStorage.setItem("userToken", token);
-        sessionStorage.setItem("userName", JSON.stringify(response.data.data.name));
+        sessionStorage.setItem(
+          "userName",
+          JSON.stringify(response.data.data.name)
+        );
         setIsLoggedIn(true);
-        navigate("/home");
+        if (state) {
+          navigate(state.prevPath);
+        } else {
+          navigate("/home");
+        }
       }
     } catch (error) {
       console.log("error", error);
@@ -48,21 +56,27 @@ function SignIn() {
   };
 
   return (
-    <form action="" className='sign-in' onSubmit={handleFormSubmit}>
-    <h2>Sign In</h2>
-        <div className='sign-in-input'>
-            <label htmlFor="email">Email</label>
-            <br />
-            <input type="email" name='email' id='email' ref={emailRef}/>
-        </div>
-        <div className='sign-in-input'>
-            <label htmlFor="password">Password</label>
-            <br />
-            <input type="password" name='password' id='password' placeholder='At least 6 characters' ref={passwordRef}/>
-        </div>
-        <div className='sign-in-input'>
-            <input type="submit" value="Sign In" className='submit-button' />
-        </div>
+    <form action="" className="sign-in" onSubmit={handleFormSubmit}>
+      <h2>Sign In</h2>
+      <div className="sign-in-input">
+        <label htmlFor="email">Email</label>
+        <br />
+        <input type="email" name="email" id="email" ref={emailRef} />
+      </div>
+      <div className="sign-in-input">
+        <label htmlFor="password">Password</label>
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="At least 6 characters"
+          ref={passwordRef}
+        />
+      </div>
+      <div className="sign-in-input">
+        <input type="submit" value="Sign In" className="submit-button" />
+      </div>
     </form>
   );
 }

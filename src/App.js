@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -7,23 +7,14 @@ import Social from "./pages/Social";
 import Library from "./pages/Library";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-
-export const AuthContext = createContext();
+import AuthProvider from "./provider/AuthProvider";
+import MusicPlayer from "./components/music/MusicPlayer";
+import AuthNavigator from "./navigator/AuthNavigator";
 
 function App() {
-    let isUserLoggedIn;
-
-    const token = sessionStorage.getItem("userToken");
-    if(token) {
-        isUserLoggedIn = true;
-    } else {
-        isUserLoggedIn = false;
-    }
-
-  const [isLoggedIn, setIsLoggedIn] = useState(isUserLoggedIn);
   return (
     <div className="App">
-      <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <AuthProvider>
         <Header />
         <Routes>
           {/* <Route path="/" element={<Home/>}/> */}
@@ -33,8 +24,16 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/myprofile" element={<h3>My Profile</h3>} />
+          <Route
+            path="/play/:musicId"
+            element={
+              <AuthNavigator>
+                <MusicPlayer />
+              </AuthNavigator>
+            }
+          />
         </Routes>
-      </AuthContext.Provider>
+      </AuthProvider>
     </div>
   );
 }

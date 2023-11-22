@@ -1,8 +1,8 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import "./SignUp.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../App";
+import { useAuth } from "../provider/AuthProvider";
 
 
 
@@ -11,7 +11,7 @@ function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const {setIsLoggedIn} = useContext(AuthContext);
+  const {setIsLoggedIn} = useAuth();
 
   const createUser = async (user) => {
     const config = {

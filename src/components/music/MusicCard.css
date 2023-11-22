@@ -6,6 +6,12 @@
     padding: 1rem;
 }
 
+.music-card-container:hover {
+    cursor: pointer;
+    background-color: rgb(11, 13, 13);
+    border-radius: 0.8rem;
+}
+
 .music-card-image {
     width: 150px;
     height: 150px;

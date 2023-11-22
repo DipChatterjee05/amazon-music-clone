@@ -38,7 +38,7 @@ function Home() {
         <section  className="music-list-container">
           {musicList.length > 0 &&
             musicList.map((music) => {
-              return <MusicCard details={music} />;
+              return <MusicCard details={music} key={music._id}/>;
             })}
         </section>
       )}

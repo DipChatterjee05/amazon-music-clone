@@ -1,14 +1,14 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../App";
+import { useAuth } from "../../provider/AuthProvider";
 
 function Profile() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const userName = JSON.parse(sessionStorage.getItem("userName"));
 
   const navigateHandler = (path) => {
@@ -32,7 +32,7 @@ function Profile() {
         <section className="profile-icon">
           <FontAwesomeIcon icon={faUser} />
         </section>
-        {isLoggedIn && <span>{userName}</span>}
+        {isLoggedIn && <span className="user-name">{userName}</span>}
       </section>
       {isModalVisible && (
         <section className="auth-modal">

@@ -94,3 +94,7 @@
   height: 32px;
   cursor: pointer;
 }
+
+.user-name {
+  font-weight: 700;
+}
