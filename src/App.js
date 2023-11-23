@@ -17,13 +17,13 @@ function App() {
       <AuthProvider>
         <Header />
         <Routes>
-          {/* <Route path="/" element={<Home/>}/> */}
+          <Route path="/" element={<Home/>}/>
           <Route path="/home" element={<Home />} />
           <Route path="/social" element={<Social />} />
           <Route path="/library" element={<Library />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/myprofile" element={<h3>My Profile</h3>} />
+          <Route path="/myprofile" element={<h1>My Profile</h1>} />
           <Route
             path="/play/:musicId"
             element={

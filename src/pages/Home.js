@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import MusicCard from "../components/music/MusicCard";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Home() {
   const [musicList, setMusicList] = useState([]);
@@ -30,10 +32,11 @@ function Home() {
   useEffect(() => {
     getMusicList();
   }, []);
+  
   return (
     <main>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="loading"><FontAwesomeIcon icon={faSpinner} size="2xl" /></div>
       ) : (
         <section  className="music-list-container">
           {musicList.length > 0 &&
