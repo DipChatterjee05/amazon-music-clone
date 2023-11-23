@@ -28,7 +28,8 @@ function Social() {
 
   useEffect(()=>{
     getPosts();
-  }, [])
+  }, []);
+  
   return  isLoading ? (
     <div className="loading"><FontAwesomeIcon icon={faSpinner} size="2xl" /></div>
   ) : ( <section className="social-container">

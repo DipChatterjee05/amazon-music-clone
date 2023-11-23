@@ -3,7 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./MusicPlayer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faPause,
+  faPlay,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 
 const MusicPlayer = () => {
   const { musicId } = useParams();
@@ -37,6 +42,7 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     getMusicDetails();
+    // eslint-disable-next-line
   }, []);
 
   const getDate = (FullDate) => {
@@ -81,7 +87,9 @@ const MusicPlayer = () => {
   };
 
   return isLoading ? (
-    <div>Loading...</div>
+    <div className="loading">
+      <FontAwesomeIcon icon={faSpinner} size="2xl" />
+    </div>
   ) : (
     <section className="music-player-container">
       <img
@@ -130,8 +138,17 @@ const MusicPlayer = () => {
           )}
         </button>
 
-        <div>00:00 / {formatTime(duration)}</div>
-        <input type="range" value={currTime} min={0} max={duration} />
+        <div>{formatTime(currTime)} / {formatTime(duration)}</div>
+        <input
+          type="range"
+          value={currTime}
+          min={0}
+          max={duration}
+          onChange={(e) => {
+            setCurrTime(e.target.value);
+            audioRef.current.currentTime = e.target.value;
+          }}
+        />
         <button className="library-button">
           <FontAwesomeIcon icon={faHeart} size="xl" />
         </button>

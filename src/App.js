@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -10,8 +9,10 @@ import SignUp from "./pages/SignUp";
 import AuthProvider from "./provider/AuthProvider";
 import MusicPlayer from "./components/music/MusicPlayer";
 import AuthNavigator from "./navigator/AuthNavigator";
+import MyProfile from "./pages/MyProfile";
 
 function App() {
+
   return (
     <div className="App">
       <AuthProvider>
@@ -23,7 +24,7 @@ function App() {
           <Route path="/library" element={<Library />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/myprofile" element={<h1>My Profile</h1>} />
+          <Route path="/myprofile" element={<MyProfile/>} />
           <Route
             path="/play/:musicId"
             element={

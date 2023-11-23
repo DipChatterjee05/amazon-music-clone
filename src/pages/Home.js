@@ -30,7 +30,7 @@ function Home() {
   };
 
   useEffect(() => {
-    getMusicList();
+      getMusicList();
   }, []);
   
   return (
@@ -45,6 +45,8 @@ function Home() {
             })}
         </section>
       )}
+
+
     </main>
   );
 }
