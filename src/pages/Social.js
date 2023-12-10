@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Social() {
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
+  
   const getPosts = async () => {
     const config = {
       headers: {
@@ -19,6 +20,7 @@ function Social() {
       setIsLoading(true);
       const response = await axios.get("https://academics.newtonschool.co/api/v1/quora/post?limit=100", config);
       setPosts(response.data.data);
+      // console.log(response.data.data);
     } catch(error) {
       console.log("error", error);
     } finally {

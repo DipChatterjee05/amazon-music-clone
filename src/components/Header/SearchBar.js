@@ -5,9 +5,8 @@ import { useState, useEffect } from "react";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function SearchBar() {
-  // const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResult, setSearchResult] = useState(null);
+  const [searchResult, setSearchResult] = useState([]);
 
   const handleSearch = async () => {
     // Search Term
@@ -20,7 +19,6 @@ function SearchBar() {
       },
     };
     try {
-      // setIsLoading(true);
       const response = await axios.get(
         `https://academics.newtonschool.co/api/v1/music/song?search={"title":"${searchTerm}"}`,
         config
@@ -32,19 +30,14 @@ function SearchBar() {
       // Response Data
     } catch (error) {
       console.log("Error", error);
-    } finally {
-      // setIsLoading(false);
     }
-  };
-
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
   };
 
   useEffect(() => {
     if (searchTerm !== "") {
       handleSearch();
     }
+    // eslint-disable-next-line
   }, [searchTerm]);
 
   return (
@@ -55,22 +48,13 @@ function SearchBar() {
         placeholder="Search"
         id="search"
         value={searchTerm}
-        onChange={handleInputChange}
+        onChange={(event) => {
+          setSearchTerm(event.target.value);
+        }}
       />
       <button className="search-button" onClick={handleSearch}>
         <FontAwesomeIcon icon={faMagnifyingGlass} size="xl" />
       </button>
-
-      {searchResult && (
-        <div className="search-results">
-          {searchResult.map((result) => (
-            <div key={result.id} className="search-result">
-              <h3>{result.title}</h3>
-              <p>{result.artist}</p>
-            </div>
-          ))}
-        </div>
-      )}
     </section>
   );
 }

@@ -30,23 +30,23 @@ function Home() {
   };
 
   useEffect(() => {
-      getMusicList();
+    getMusicList();
   }, []);
-  
+
   return (
     <main>
       {isLoading ? (
-        <div className="loading"><FontAwesomeIcon icon={faSpinner} size="2xl" /></div>
+        <div className="loading">
+          <FontAwesomeIcon icon={faSpinner} size="2xl" />
+        </div>
       ) : (
-        <section  className="music-list-container">
+        <section className="music-list-container">
           {musicList.length > 0 &&
             musicList.map((music) => {
-              return <MusicCard details={music} key={music._id}/>;
+              return <MusicCard details={music} key={music._id} />;
             })}
         </section>
       )}
-
-
     </main>
   );
 }

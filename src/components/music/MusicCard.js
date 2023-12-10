@@ -8,6 +8,7 @@ const MusicCard = ({ details }) => {
   const artistNames = artist.map((ast) => ast.name);
 
   const navigate = useNavigate();
+  
   const playMusic = () => {
     navigate(`/play/${_id}`);
   }

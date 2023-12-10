@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import "./MusicPlayer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBackwardStep,
+  faForwardStep,
   faHeart,
   faPause,
   faPlay,
@@ -31,7 +33,7 @@ const MusicPlayer = () => {
         `https://academics.newtonschool.co/api/v1/music/song/${musicId}`,
         config
       );
-      console.log("musicData:", musicData);
+      // console.log("musicData:", musicData);
       setMusic(musicData.data.data);
     } catch (error) {
       console.log("error", error);
@@ -55,7 +57,7 @@ const MusicPlayer = () => {
   };
 
   const playOrPause = () => {
-    console.log("audioRef.current", audioRef.current);
+    // console.log("audioRef.current", audioRef.current);
     if (!isPlaying) {
       audioRef.current.play();
     } else {
@@ -67,13 +69,13 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     if (audioRef.current) {
-      console.log("audioRef.current.duration", audioRef.current.duration);
+      // console.log("audioRef.current.duration", audioRef.current.duration);
     }
   }, [audioRef]);
 
   const formatTime = (time) => {
     const totalTime = Math.ceil(time);
-    console.log("totalTime", totalTime);
+    // console.log("totalTime", totalTime);
     const min = Math.floor(totalTime / 60);
     const sec = totalTime % 60;
     const formatTimeNo = (no) => {
@@ -85,6 +87,27 @@ const MusicPlayer = () => {
   const updateTime = (e) => {
     setCurrTime(e.target.currentTime);
   };
+
+  // Changes
+  const saveToLocalStorage = (music) => {
+    const savedSongs = JSON.parse(localStorage.getItem('savedSongs')) || [];
+  
+    // Check if the musicId of the current song already exists in the savedSongs array
+    const isSongSaved = savedSongs.some(
+      (savedSong) => savedSong.musicId === music.musicId
+    );
+  
+    if (!isSongSaved) {
+      // If the song is not already saved, add it to the saved songs list
+      const updatedSongs = [...savedSongs, music];
+      localStorage.setItem('savedSongs', JSON.stringify(updatedSongs));
+      alert('Song saved!');
+    } else {
+      alert('Song is already saved!');
+    }
+  };
+  
+  // Changes
 
   return isLoading ? (
     <div className="loading">
@@ -126,6 +149,10 @@ const MusicPlayer = () => {
           </p>
         </section>
 
+        <button className="forward-backward-button">
+          <FontAwesomeIcon icon={faBackwardStep} size="xl" />
+        </button>
+
         <button onClick={playOrPause} className="play-and-pause-button">
           {isPlaying ? (
             <aside className="pause-button">
@@ -138,7 +165,13 @@ const MusicPlayer = () => {
           )}
         </button>
 
-        <div>{formatTime(currTime)} / {formatTime(duration)}</div>
+        <button className="forward-backward-button">
+          <FontAwesomeIcon icon={faForwardStep} size="xl" />
+        </button>
+
+        <div>
+          {formatTime(currTime)} / {formatTime(duration)}
+        </div>
         <input
           type="range"
           value={currTime}
@@ -149,7 +182,7 @@ const MusicPlayer = () => {
             audioRef.current.currentTime = e.target.value;
           }}
         />
-        <button className="library-button">
+        <button className="library-button" onClick={() => saveToLocalStorage(music)}>
           <FontAwesomeIcon icon={faHeart} size="xl" />
         </button>
       </section>

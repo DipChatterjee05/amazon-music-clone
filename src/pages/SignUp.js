@@ -24,7 +24,7 @@ function SignUp() {
         {...user, appType: "music"},
         config
       );
-      console.log("response", response);
+      // console.log("response", response);
       const token = response.data.token;
       if(token) {
         sessionStorage.setItem("userToken", token);

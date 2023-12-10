@@ -82,3 +82,13 @@
   font-size: 0.8rem;
   font-weight: 700;
 }
+
+.forward-backward-button {
+  background-color: rgb(255, 137, 75);
+  border: none;
+  cursor: pointer;
+}
+
+.forward-backward-button:hover {
+  transform: scale(1.20);
+}

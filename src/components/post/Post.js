@@ -1,15 +1,23 @@
 import React from "react";
 import "./Post.css";
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ data }) => {
   const {
-    title,
+    _id, title,
     author: { name, profileImage },
     content,
     channel: { image, name: channelName },
     likeCount,
     commentCount,
   } = data;
+
+  const navigate = useNavigate();
+
+  const likePost = () => {
+    navigate(`/post/${_id}`);
+  }
+
   return (
     <section className="post-section">
       <header className="post-header">
@@ -27,7 +35,7 @@ const Post = ({ data }) => {
           <p>Channel: {channelName}</p>
         </section>
         <section className="post-footer-like-comment">
-          <p><button className="like-button">Likes</button>: {likeCount}</p>
+          <p><button className="like-button" onClick={likePost}>Likes</button>: {likeCount}</p>
           <p>Comments: {commentCount}</p>
         </section>
       </footer>
