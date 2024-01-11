@@ -6,6 +6,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
+  // eslint-disable-next-line
   const [searchResult, setSearchResult] = useState([]);
 
   const handleSearch = async () => {

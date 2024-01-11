@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -13,7 +14,6 @@ import MyProfile from "./pages/MyProfile";
 import PostInfo from "./components/post/PostInfo";
 
 function App() {
-  
   return (
     <div className="App">
       <AuthProvider>
