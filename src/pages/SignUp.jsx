@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import "./SignUp.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { useAuth } from "../provider/AuthProvider";
+import "./SignUp.css";
 
 function SignUp() {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const {setIsLoggedIn} = useAuth();
+  const { setIsLoggedIn } = useAuth();
 
   const createUser = async (user) => {
     const config = {
@@ -19,28 +19,24 @@ function SignUp() {
     };
 
     try {
-      const response = await axios.post(
-        "https://academics.newtonschool.co/api/v1/user/signup",
-        {...user, appType: "music"},
+      const response = await axios.post("https://academics.newtonschool.co/api/v1/user/signup",
+        { ...user, appType: "music" },
         config
       );
-      // console.log("response", response);
       const token = response.data.token;
-      if(token) {
+      if (token) {
         sessionStorage.setItem("userToken", token);
         sessionStorage.setItem("userName", JSON.stringify(response.data.data.user.name));
         setIsLoggedIn(true);
         navigate("/home");
       }
     } catch (error) {
-      console.log("error", error);
-    } finally {
+      console.error("error", error);
     }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
     const user = {
       name: nameRef.current.value,
       email: emailRef.current.value,
@@ -55,13 +51,7 @@ function SignUp() {
       <div className="sign-up-input">
         <label htmlFor="name">Name</label>
         <br />
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="First and last name"
-          ref={nameRef}
-        />
+        <input type="text" name="name" id="name" placeholder="First and last name" ref={nameRef} />
       </div>
       <div className="sign-up-input">
         <label htmlFor="email">Email</label>
@@ -71,13 +61,7 @@ function SignUp() {
       <div className="sign-up-input">
         <label htmlFor="password">Password</label>
         <br />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="At least 6 characters"
-          ref={passwordRef}
-        />
+        <input type="password" name="password" id="password" placeholder="At least 6 characters" ref={passwordRef} />
       </div>
       <div>
         <input type="submit" value="Sign Up" className="submit-button" />

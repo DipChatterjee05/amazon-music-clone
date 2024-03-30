@@ -37,3 +37,11 @@ input {
 .sign-in-input input {
   color: black;
 }
+
+.music-list-container {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
-function AuthProvider({ children }) {
+const AuthProvider = ({ children }) => {
   let isUserLoggedIn;
 
   const token = sessionStorage.getItem("userToken");

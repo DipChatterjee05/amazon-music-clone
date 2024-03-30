@@ -1,14 +1,12 @@
 import React from "react";
-import "./MusicCard.css";
 import { useNavigate } from "react-router-dom";
-
+import "./MusicCard.css";
 
 const MusicCard = ({ details }) => {
   const { thumbnail, title, artist, _id } = details;
   const artistNames = artist.map((ast) => ast.name);
-
   const navigate = useNavigate();
-  
+
   const playMusic = () => {
     navigate(`/play/${_id}`);
   }
@@ -19,6 +17,6 @@ const MusicCard = ({ details }) => {
       <p className="music-card-artist one-line" title={artistNames}>{artistNames.join(" & ")}</p>
     </section>
   );
-};
+}
 
 export default MusicCard;

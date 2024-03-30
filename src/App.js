@@ -1,19 +1,13 @@
 import React from "react";
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { Home, Library, MyProfile, SignIn, SignUp, Social } from "./pages";
 import Header from "./components/Header/Header";
-import Home from "./pages/Home";
-import Social from "./pages/Social";
-import Library from "./pages/Library";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import AuthProvider from "./provider/AuthProvider";
 import MusicPlayer from "./components/music/MusicPlayer";
-import AuthNavigator from "./navigator/AuthNavigator";
-import MyProfile from "./pages/MyProfile";
 import PostInfo from "./components/post/PostInfo";
+import AuthNavigator from "./navigator/AuthNavigator";
+import AuthProvider from "./provider/AuthProvider";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <AuthProvider>
@@ -26,22 +20,16 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/myprofile" element={<MyProfile />} />
-          <Route
-            path="/play/:musicId"
-            element={
-              <AuthNavigator>
-                <MusicPlayer />
-              </AuthNavigator>
-            }
-          />
-          <Route
-            path="/post/:postId"
-            element={
-              <AuthNavigator>
-                <PostInfo />
-              </AuthNavigator>
-            }
-          ></Route>
+          <Route path="/play/:musicId" element={
+            <AuthNavigator>
+              <MusicPlayer />
+            </AuthNavigator>
+          } />
+          <Route path="/post/:postId" element={
+            <AuthNavigator>
+              <PostInfo />
+            </AuthNavigator>
+          } />
         </Routes>
       </AuthProvider>
     </div>

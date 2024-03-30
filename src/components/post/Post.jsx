@@ -1,6 +1,6 @@
 import React from "react";
-import "./Post.css";
 import { useNavigate } from "react-router-dom";
+import "./Post.css";
 
 const Post = ({ data }) => {
   const {
@@ -41,6 +41,6 @@ const Post = ({ data }) => {
       </footer>
     </section>
   );
-};
+}
 
 export default Post;

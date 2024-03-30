@@ -1,10 +1,10 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import MusicCard from "../components/music/MusicCard";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Home() {
+const Home = () => {
   const [musicList, setMusicList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,14 +16,11 @@ function Home() {
     };
     try {
       setIsLoading(true);
-      const response = await axios.get(
-        "https://academics.newtonschool.co/api/v1/music/song",
-        config
-      );
+      const response = await axios.get("https://academics.newtonschool.co/api/v1/music/song", config);
       setMusicList(response.data.data);
       setIsLoading(false);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
     } finally {
       setIsLoading(false);
     }
@@ -42,9 +39,9 @@ function Home() {
       ) : (
         <section className="music-list-container">
           {musicList.length > 0 &&
-            musicList.map((music) => {
-              return <MusicCard details={music} key={music._id} />;
-            })}
+            musicList.map((music) => (
+              <MusicCard details={music} key={music._id} />
+            ))}
         </section>
       )}
     </main>

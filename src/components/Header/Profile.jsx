@@ -1,11 +1,10 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./Header.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../provider/AuthProvider";
 
-function Profile() {
+const Profile = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = useAuth();
@@ -25,10 +24,7 @@ function Profile() {
 
   return (
     <section>
-      <section
-        className="profile-container"
-        onClick={() => setIsModalVisible(!isModalVisible)}
-      >
+      <section className="profile-container" onClick={() => setIsModalVisible(!isModalVisible)}>
         <section className="profile-icon">
           <FontAwesomeIcon icon={faUser} />
         </section>

@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const PostInfo = () => {
   return (
-    <div>PostInfo</div>
-  )
+    <h1>PostInfo</h1>
+  );
 }
 
 export default PostInfo;

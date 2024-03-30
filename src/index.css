@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    color: white;
+    font-family: Poppins, sans-serif;
+}
+
+body {
+    background-color: rgb(19, 24, 25);
+}
